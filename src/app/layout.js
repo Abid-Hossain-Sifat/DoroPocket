@@ -1,5 +1,7 @@
 import { Poppins } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
+import Navbar from "@/Components/Navbar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -13,9 +15,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.className} min-h-full flex flex-col`}>
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light" 
+        >
+          <Navbar></Navbar>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
