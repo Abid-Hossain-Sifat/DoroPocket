@@ -7,7 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
 
@@ -15,17 +15,18 @@ const Navbar = () => {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
+  if (!mounted) {
+    return <div className="h-[64px]" />;
+  }
 
-  const isDark = theme === "dark";
+  const isDark = resolvedTheme === "dark";
 
   return (
     <div
-      className={`w-full border-b transition-all duration-300 ${
-        isDark
+      className={`w-full border-b transition-all duration-300 ${isDark
           ? "bg-[#0B111E] border-slate-800 text-white"
           : "bg-white border-slate-100 text-slate-900"
-      }`}
+        }`}
     >
       <div className="max-w-[80%] mx-auto py-4 flex justify-between items-center">
         <div className="flex items-center gap-2 cursor-pointer">
@@ -44,60 +45,56 @@ const Navbar = () => {
         >
           <Link
             href="/"
-            className={`pb-1 transition-colors ${
-              pathname === "/"
+            className={`pb-1 transition-colors ${pathname === "/"
                 ? isDark
                   ? "text-cyan-400 border-b-2 border-cyan-400"
                   : "text-[#0071E3] border-b-2 border-[#0071E3]"
                 : isDark
                   ? "hover:text-cyan-400"
                   : "hover:text-[#0071E3]"
-            }`}
+              }`}
           >
             Explore
           </Link>
 
           <Link
             href="/products"
-            className={`pb-1 transition-colors ${
-              pathname === "/products"
+            className={`pb-1 transition-colors ${pathname === "/products"
                 ? isDark
                   ? "text-cyan-400 border-b-2 border-cyan-400"
                   : "text-[#0071E3] border-b-2 border-[#0071E3]"
                 : isDark
                   ? "hover:text-cyan-400"
                   : "hover:text-[#0071E3]"
-            }`}
+              }`}
           >
             All Products
           </Link>
 
           <Link
             href="/new-arrivals"
-            className={`pb-1 transition-colors ${
-              pathname === "/new-arrivals"
+            className={`pb-1 transition-colors ${pathname === "/new-arrivals"
                 ? isDark
                   ? "text-cyan-400 border-b-2 border-cyan-400"
                   : "text-[#0071E3] border-b-2 border-[#0071E3]"
                 : isDark
                   ? "hover:text-cyan-400"
                   : "hover:text-[#0071E3]"
-            }`}
+              }`}
           >
             New Arrivals
           </Link>
 
           <Link
             href="/support"
-            className={`pb-1 transition-colors ${
-              pathname === "/support"
+            className={`pb-1 transition-colors ${pathname === "/support"
                 ? isDark
                   ? "text-cyan-400 border-b-2 border-cyan-400"
                   : "text-[#0071E3] border-b-2 border-[#0071E3]"
                 : isDark
                   ? "hover:text-cyan-400"
                   : "hover:text-[#0071E3]"
-            }`}
+              }`}
           >
             Support
           </Link>
@@ -124,14 +121,22 @@ const Navbar = () => {
             </span>
           </button>
 
-          <button
-            className={`flex items-center gap-2 py-1.5 px-3 rounded-full transition-colors ${isDark ? "hover:bg-slate-800" : "hover:bg-slate-100"}`}
-          >
-            <User size={22} className="stroke-[2]" />
-            <span className="hidden sm:inline text-sm font-medium">
-              Account
-            </span>
-          </button>
+          <Link href='/sign-in'>
+            <button
+              className={`flex items-center gap-3 py-1.5 px-3 rounded-full transition-all duration-300 ${isDark
+                  ? "hover:bg-slate-800 text-slate-200"
+                  : "hover:bg-slate-100 text-slate-700"
+                }`}
+            >
+              <User size={22} className="stroke-[2]" />
+
+              <div className="hidden sm:flex flex-col leading-tight text-left">
+                <span className="text-sm font-medium">Account</span>
+
+                <span className="text-[11px] opacity-70">Register or Login</span>
+              </div>
+            </button>
+          </Link>
         </div>
       </div>
     </div>

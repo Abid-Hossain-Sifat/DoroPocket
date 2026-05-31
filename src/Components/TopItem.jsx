@@ -1,15 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import { products } from "@/lib/data";
 
 const TopItem = () => {
   const [data, setData] = useState([]);
-
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,9 +23,7 @@ const TopItem = () => {
 
   return (
     <section
-      className={`py-16 transition-colors duration-300 ${
-        isDark ? "bg-[#0B111E] text-white" : "bg-slate-50 text-slate-900"
-      }`}
+      className="py-16 transition-colors duration-300 bg-slate-50 text-slate-900 dark:bg-[#0B111E] dark:text-white"
     >
       <div className="max-w-[80%] mx-auto">
         <div className="mb-10 text-center">
@@ -46,11 +40,7 @@ const TopItem = () => {
           {data.map((product) => (
             <div
               key={product._id}
-              className={`rounded-[2rem] border overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
-                isDark
-                  ? "bg-slate-900 border-slate-800"
-                  : "bg-white border-slate-200"
-              }`}
+              className="rounded-[2.5rem] border overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl bg-white border-slate-200 dark:bg-slate-900 dark:border-slate-800"
             >
               <img
                 src={product.thumbnail}
@@ -74,11 +64,7 @@ const TopItem = () => {
                 <div className="mt-5 flex gap-2">
                   <Link
                     href={`/products/${product._id}`}
-                    className={`flex-1 rounded-full border px-4 py-2 text-center text-sm font-medium transition ${
-                      isDark
-                        ? "border-slate-700 hover:border-[#0071E3] hover:text-[#0071E3]"
-                        : "border-slate-300 hover:border-[#0071E3] hover:text-[#0071E3]"
-                    }`}
+                    className="flex-1 rounded-full border px-4 py-2 text-center text-sm font-medium transition border-slate-300 hover:border-[#0071E3] hover:text-[#0071E3] dark:border-slate-700 dark:hover:border-[#0071E3] dark:hover:text-[#0071E3]"
                   >
                     See Details
                   </Link>

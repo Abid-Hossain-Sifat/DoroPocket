@@ -2,21 +2,17 @@
 
 import React from "react";
 import Link from "next/link";
-import { useTheme } from "next-themes";
 import { Home, AlertTriangle } from "lucide-react";
 
 const NotFound = () => {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
   return (
     <div
-      className={`min-h-screen py-20 transition-colors duration-300 ${isDark ? "bg-[#0B111E] text-white" : "bg-slate-50 text-slate-900"}`}
+      className="min-h-screen py-20 transition-colors duration-300 bg-slate-50 text-slate-900 dark:bg-[#0B111E] dark:text-white"
     >
       <div className="max-w-[80%] mx-auto flex flex-col items-center justify-center text-center">
         {/* Icon Container */}
         <div
-          className={`p-6 rounded-full mb-8 ${isDark ? "bg-slate-800" : "bg-slate-200"}`}
+          className="p-6 rounded-full mb-8 bg-slate-200 dark:bg-slate-800"
         >
           <AlertTriangle className="w-16 h-16 text-[#0071E3]" />
         </div>
@@ -25,7 +21,7 @@ const NotFound = () => {
         <h1 className="text-9xl font-bold tracking-tighter">404</h1>
         <h2 className="text-3xl font-semibold mt-4">Page Not Found</h2>
         <p
-          className={`mt-4 text-lg max-w-md ${isDark ? "text-slate-400" : "text-slate-600"}`}
+          className="mt-4 text-lg max-w-md text-slate-600 dark:text-slate-400"
         >
           Sorry, the page you are looking for cannot be found. Please check the
           correct URL or return to our homepage.

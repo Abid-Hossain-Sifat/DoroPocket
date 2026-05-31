@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { useTheme } from "next-themes";
 import { Star } from "lucide-react";
 
 const reviews = [
@@ -26,18 +25,15 @@ const reviews = [
 ];
 
 const Review = () => {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
   return (
-    <section className={`py-20 transition-colors duration-300 ${isDark ? "bg-[#0B111E]" : "bg-white"}`}>
+    <section className="py-20 transition-colors duration-300 bg-white dark:bg-[#0B111E]">
       <div className="max-w-[80%] mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className={`text-4xl font-bold mb-4 ${isDark ? "text-white" : "text-slate-900"}`}>
+          <h2 className="text-4xl font-bold mb-4 text-slate-900 dark:text-white">
             The Pulse of the Community
           </h2>
-          <p className={isDark ? "text-slate-400" : "text-slate-500"}>
+          <p className="text-slate-500 dark:text-slate-400">
             Trusted by the world's most demanding tech enthusiasts.
           </p>
         </div>
@@ -47,11 +43,7 @@ const Review = () => {
           {reviews.map((review, index) => (
             <div
               key={index}
-              className={`p-8 rounded-2xl flex flex-col justify-between border transition-colors duration-300 ${
-                isDark 
-                  ? "bg-[#141C2C] border-slate-800" 
-                  : "bg-slate-50 border-slate-100"
-              }`}
+              className="p-8 rounded-2xl flex flex-col justify-between border transition-colors duration-300 bg-slate-50 border-slate-100 dark:bg-[#141C2C] dark:border-slate-800"
             >
               <div>
                 <div className="flex gap-1 mb-6 text-[#0071E3]">
@@ -59,7 +51,7 @@ const Review = () => {
                     <Star key={i} size={18} fill="currentColor" className="stroke-none" />
                   ))}
                 </div>
-                <p className={`text-[15px] leading-relaxed mb-8 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                <p className="text-[15px] leading-relaxed mb-8 text-slate-600 dark:text-slate-300">
                   "{review.text}"
                 </p>
               </div>
@@ -69,10 +61,10 @@ const Review = () => {
                   {review.initials}
                 </div>
                 <div>
-                  <h4 className={`font-semibold text-sm ${isDark ? "text-white" : "text-slate-900"}`}>
+                  <h4 className="font-semibold text-sm text-slate-900 dark:text-white">
                     {review.name}
                   </h4>
-                  <p className={`text-[10px] tracking-widest font-bold uppercase ${isDark ? "text-slate-500" : "text-slate-400"}`}>
+                  <p className="text-[10px] tracking-widest font-bold uppercase text-slate-400 dark:text-slate-500">
                     {review.role}
                   </p>
                 </div>

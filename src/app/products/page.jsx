@@ -1,18 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-
-import { useTheme } from "next-themes";
-
 import { products } from "@/lib/data";
 import Link from "next/link";
 
 const ProductsPage = () => {
   const [data, setData] = useState([]);
-
-  const { theme } = useTheme();
-
-  const isDark = theme === "dark";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,13 +20,13 @@ const ProductsPage = () => {
 
   return (
     <main
-      className={`min-h-screen transition-colors duration-300 ${isDark ? "bg-[#0B111E] text-white" : "bg-slate-50 text-slate-900"}`}
+      className="min-h-screen transition-colors duration-300 bg-slate-50 text-slate-900 dark:bg-[#0B111E] dark:text-white"
     >
       <div className="max-w-[80%] mx-auto py-12">
         {/* Header Section */}
 
         <div
-          className={`mb-12 flex flex-col gap-6 rounded-[2rem] border p-8 shadow-sm ${isDark ? "border-slate-800 bg-slate-950/80" : "border-slate-200 bg-white/90"}`}
+          className="mb-12 flex flex-col gap-6 rounded-[2rem] border p-8 shadow-sm border-slate-200 bg-white/90 dark:border-slate-800 dark:bg-slate-950/80"
         >
           <div className="max-w-3xl">
             <p className="text-sm uppercase tracking-[0.35em] text-[#0071E3]">
@@ -45,7 +38,7 @@ const ProductsPage = () => {
             </h1>
 
             <p
-              className={`mt-4 leading-7 ${isDark ? "text-slate-400" : "text-slate-600"}`}
+              className="mt-4 leading-7 text-slate-600 dark:text-slate-400"
             >
               Discover premium gadgets and smart devices crafted for
               performance, style, and everyday innovation.
@@ -59,11 +52,7 @@ const ProductsPage = () => {
           {data.map((product, index) => (
             <article
               key={product._id || index}
-              className={`group overflow-hidden rounded-[2rem] border transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${
-                isDark
-                  ? "border-slate-800 bg-slate-900 hover:border-[#0071E3]/50"
-                  : "border-slate-200 bg-white hover:border-[#0071E3]/30"
-              }`}
+              className="group overflow-hidden rounded-[2rem] border transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl border-slate-200 bg-white hover:border-[#0071E3]/30 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-[#0071E3]/50"
             >
               {/* Product Image */}
               <div className="overflow-hidden">
@@ -85,9 +74,7 @@ const ProductsPage = () => {
                 </h2>
 
                 <p
-                  className={`mt-4 text-sm leading-6 line-clamp-3 ${
-                    isDark ? "text-slate-400" : "text-slate-600"
-                  }`}
+                  className="mt-4 text-sm leading-6 line-clamp-3 text-slate-600 dark:text-slate-400"
                 >
                   {product.description ||
                     "Premium gadget engineered for performance and innovation."}
@@ -102,13 +89,9 @@ const ProductsPage = () => {
 
                 {/* Buttons */}
                 <div className="mt-6 flex gap-3">
-                  
-                    <button
-                    className={`flex-1 rounded-full border px-4 py-2.5 text-sm font-medium transition-all duration-300 ${
-                      isDark
-                        ? "border-slate-700 text-white hover:border-[#0071E3] hover:text-[#0071E3]"
-                        : "border-slate-300 text-slate-900 hover:border-[#0071E3] hover:text-[#0071E3]"
-                    }`}
+
+                  <button
+                    className="flex-1 rounded-full border px-4 py-2.5 text-sm font-medium transition-all duration-300 border-slate-300 text-slate-900 hover:border-[#0071E3] hover:text-[#0071E3] dark:border-slate-700 dark:text-white dark:hover:border-[#0071E3] dark:hover:text-[#0071E3]"
                   >
                     <Link href={`/products/${product._id}`}>
                       See Details

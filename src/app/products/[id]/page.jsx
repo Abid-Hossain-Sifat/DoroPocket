@@ -2,15 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { useTheme } from "next-themes";
 import { pDetails } from "@/lib/Details";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react"; 
 
 const DetailsPage = () => {
   const { id } = useParams();
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
 
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
@@ -34,22 +31,20 @@ const DetailsPage = () => {
   const allImages = [product.thumbnail, ...(product.images || [])];
 
   return (
-    <div className={`min-h-screen py-12 transition-colors duration-300 ${isDark ? "bg-[#0B111E] text-white" : "bg-slate-50 text-slate-900"}`}>
+    <div className="min-h-screen py-12 transition-colors duration-300 bg-slate-50 text-slate-900 dark:bg-[#0B111E] dark:text-white">
       <div className="max-w-[80%] mx-auto">
         
         {/* BACK LINK WITH LUCIDE ICON */}
         <Link 
           href='/products'
-          className={`inline-flex items-center gap-2 mb-8 text-sm font-medium transition-colors ${
-            isDark ? "text-slate-400 hover:text-white" : "text-slate-500 hover:text-[#0071E3]"
-          }`}
+          className="inline-flex items-center gap-2 mb-8 text-sm font-medium transition-colors text-slate-500 hover:text-[#0071E3] dark:text-slate-400 dark:hover:text-white"
         >
           <ChevronLeft className="w-5 h-5" />
           Back to all products
         </Link>
 
         {/* MAIN CONTAINER */}
-        <div className={`grid gap-12 lg:grid-cols-2 rounded-[2rem] border p-8 items-start ${isDark ? "border-slate-800 bg-slate-900/40" : "border-slate-200 bg-white"}`}>
+        <div className="grid gap-12 lg:grid-cols-2 rounded-[2rem] border p-8 items-start border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900/40">
           
           {/* IMAGE SECTION */}
           <div className="flex flex-col gap-4 h-full">

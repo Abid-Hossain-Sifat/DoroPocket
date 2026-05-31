@@ -2,7 +2,6 @@
 
 import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useTheme } from "next-themes";
 
 const ExploreCard = ({ image, title, category, className }) => {
   const ref = useRef(null);
@@ -56,23 +55,20 @@ const ExploreCard = ({ image, title, category, className }) => {
 };
 
 const Explore = () => {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
   return (
     <div
-      className={`py-20 transition-colors duration-300 ${isDark ? "bg-[#0B111E]" : "bg-white"}`}
+      className="py-20 transition-colors duration-300 bg-white dark:bg-[#0B111E]"
     >
       <div className="max-w-[80%] mx-auto">
         <div className="flex justify-between items-end mb-10">
           <div>
             <h2
-              className={`text-4xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}
+              className="text-4xl font-bold text-slate-900 dark:text-white"
             >
               Explore the Ecosystem
             </h2>
             <p
-              className={`mt-2 ${isDark ? "text-slate-400" : "text-slate-600"}`}
+              className="mt-2 text-slate-600 dark:text-slate-400"
             >
               Our curated gadgets are grouped into high-performance pockets.
             </p>

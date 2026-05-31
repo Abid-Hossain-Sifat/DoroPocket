@@ -1,41 +1,29 @@
 "use client";
 
 import React from "react";
-import { useTheme } from "next-themes";
 import { ArrowRight, Wifi } from "lucide-react";
 import { motion } from "framer-motion";
 
 const HeroBanner = () => {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
   const upDownDistance = -20;
   const animationDuration = 3;
 
   return (
     <section
-      className={`py-24 transition-colors duration-300 ${
-        isDark ? "bg-[#0B111E]" : "bg-white"
-      }`}
+      className="py-24 transition-colors duration-300 bg-white dark:bg-[#0B111E]"
     >
       <div className="max-w-[80%] mx-auto">
         <div className="grid md:grid-cols-[1.1fr_0.9fr] items-center gap-8 lg:gap-12">
           {/* Left Content */}
           <div>
             <span
-              className={`inline-block px-4 py-2 rounded-full text-sm font-semibold tracking-[0.2em] uppercase ${
-                isDark
-                  ? "bg-slate-800 text-cyan-400"
-                  : "bg-blue-50 text-[#0071E3]"
-              }`}
+              className="inline-block px-4 py-2 rounded-full text-sm font-semibold tracking-[0.2em] uppercase bg-blue-50 text-[#0071E3] dark:bg-slate-800 dark:text-cyan-400"
             >
               ● Latest Gadgets
             </span>
 
             <h1
-              className={`mt-8 text-6xl md:text-7xl lg:text-8xl font-extrabold leading-[1.05] tracking-tight ${
-                isDark ? "text-white" : "text-slate-900"
-              }`}
+              className="mt-8 text-6xl md:text-7xl lg:text-8xl font-extrabold leading-[1.05] tracking-tight text-slate-900 dark:text-white"
             >
               Unbox the{" "}
               <span className="italic text-[#0071E3]">
@@ -44,9 +32,7 @@ const HeroBanner = () => {
             </h1>
 
             <p
-              className={`mt-8 text-xl leading-relaxed max-w-2xl ${
-                isDark ? "text-slate-400" : "text-slate-600"
-              }`}
+              className="mt-8 text-xl leading-relaxed max-w-2xl text-slate-600 dark:text-slate-400"
             >
               Experience the evolution of gadget-core. We bridge the
               gap between imagination and reality with sleek,
@@ -60,11 +46,7 @@ const HeroBanner = () => {
               </button>
 
               <button
-                className={`px-10 py-4 rounded-full text-lg font-semibold transition-all ${
-                  isDark
-                    ? "bg-slate-800 text-white hover:bg-slate-700"
-                    : "bg-slate-100 text-slate-900 hover:bg-slate-200"
-                }`}
+                className="px-10 py-4 rounded-full text-lg font-semibold transition-all bg-slate-100 text-slate-900 hover:bg-slate-200 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700"
               >
                 Contact Now
               </button>
@@ -75,9 +57,7 @@ const HeroBanner = () => {
           <div className="flex justify-end">
             <div className="relative w-full max-w-[550px]">
               <motion.div
-                className={`aspect-square rounded-[3rem] flex items-center justify-center ${
-                  isDark ? "bg-slate-800/50" : "bg-blue-50"
-                }`}
+                className="aspect-square rounded-[3rem] flex items-center justify-center bg-blue-50 dark:bg-slate-800/50"
                 animate={{ y: [0, upDownDistance, 0] }}
                 transition={{
                   duration: animationDuration,
@@ -94,11 +74,7 @@ const HeroBanner = () => {
               </motion.div>
 
               <motion.div
-                className={`absolute -bottom-6 -left-8 flex items-center gap-3 p-4 pr-6 rounded-2xl shadow-xl border ${
-                  isDark
-                    ? "bg-slate-900 border-slate-700 text-white"
-                    : "bg-white border-slate-100 text-slate-900"
-                }`}
+                className="absolute -bottom-6 -left-8 flex items-center gap-3 p-4 pr-6 rounded-2xl shadow-xl border bg-white border-slate-100 text-slate-900 dark:bg-slate-900 dark:border-slate-700 dark:text-white"
                 style={{ rotate: 8 }}
                 animate={{ y: [0, upDownDistance * 0.7, 0] }}
                 transition={{
@@ -118,11 +94,7 @@ const HeroBanner = () => {
                   </p>
 
                   <p
-                    className={`text-sm ${
-                      isDark
-                        ? "text-slate-400"
-                        : "text-slate-500"
-                    }`}
+                    className="text-sm text-slate-500 dark:text-slate-400"
                   >
                     Available for pre-order
                   </p>

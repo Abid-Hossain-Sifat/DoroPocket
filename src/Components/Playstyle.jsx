@@ -2,27 +2,17 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { useTheme } from "next-themes";
 import { Gauge, Sparkles } from "lucide-react";
 
 const Playstyle = () => {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
   return (
     <section
-      className={`py-24 transition-colors duration-300 ${
-        isDark ? "bg-[#0B111E] text-white" : "bg-white text-slate-900"
-      }`}
+      className="py-24 transition-colors duration-300 bg-white text-slate-900 dark:bg-[#0B111E] dark:text-white"
     >
       <div className="max-w-[80%] mx-auto">
         {/* Main Box */}
         <div
-          className={`rounded-[2.5rem] border p-8 lg:p-12 transition-all duration-300 ${
-            isDark
-              ? "bg-slate-900/60 border-slate-800"
-              : "bg-slate-50 border-slate-200"
-          }`}
+          className="rounded-[2.5rem] border p-8 lg:p-12 transition-all duration-300 bg-slate-50 border-slate-200 dark:bg-slate-900/60 dark:border-slate-800"
         >
           <div className="grid md:grid-cols-[1.1fr_0.9fr] items-center gap-8 lg:gap-10">
             {/* Left Content */}
@@ -33,9 +23,7 @@ const Playstyle = () => {
               transition={{ duration: 0.8 }}
             >
               <span
-                className={`font-semibold tracking-[0.35em] uppercase text-sm ${
-                  isDark ? "text-blue-500" : "text-[#0071E3]"
-                }`}
+                className="font-semibold tracking-[0.35em] uppercase text-sm text-[#0071E3] dark:text-blue-500"
               >
                 For The Pro Players
               </span>
@@ -44,16 +32,14 @@ const Playstyle = () => {
                 Elevate Your
                 <br />
                 <span
-                  className={`${isDark ? "text-blue-500" : "text-[#0071E3]"}`}
+                  className="text-[#0071E3] dark:text-blue-500"
                 >
                   Playstyle.
                 </span>
               </h2>
 
               <p
-                className={`mt-8 text-xl md:text-2xl leading-relaxed max-w-xl ${
-                  isDark ? "text-slate-400" : "text-slate-600"
-                }`}
+                className="mt-8 text-xl md:text-2xl leading-relaxed max-w-xl text-slate-600 dark:text-slate-400"
               >
                 Engineered for low latency and high precision. Our gaming pocket
                 series brings the arcade power into your hands.
@@ -63,17 +49,17 @@ const Playstyle = () => {
               <div className="mt-10 flex flex-wrap gap-10">
                 <div className="flex items-start gap-3">
                   <div
-                    className={`p-2 rounded-xl ${isDark ? "bg-slate-800" : "bg-white"}`}
+                    className="p-2 rounded-xl bg-white dark:bg-slate-800"
                   >
                     <Gauge
                       size={22}
-                      className={isDark ? "text-blue-500" : "text-[#0071E3]"}
+                      className="text-[#0071E3] dark:text-blue-500"
                     />
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold">Ultra Low Latency</h4>
                     <p
-                      className={`text-sm ${isDark ? "text-slate-400" : "text-slate-600"}`}
+                      className="text-sm text-slate-600 dark:text-slate-400"
                     >
                       0.1ms response time.
                     </p>
@@ -82,17 +68,17 @@ const Playstyle = () => {
 
                 <div className="flex items-start gap-3">
                   <div
-                    className={`p-2 rounded-xl ${isDark ? "bg-slate-800" : "bg-white"}`}
+                    className="p-2 rounded-xl bg-white dark:bg-slate-800"
                   >
                     <Sparkles
                       size={22}
-                      className={isDark ? "text-blue-500" : "text-[#0071E3]"}
+                      className="text-[#0071E3] dark:text-blue-500"
                     />
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold">Custom Ergonomics</h4>
                     <p
-                      className={`text-sm ${isDark ? "text-slate-400" : "text-slate-600"}`}
+                      className="text-sm text-slate-600 dark:text-slate-400"
                     >
                       Tailored for grip comfort.
                     </p>
@@ -126,11 +112,7 @@ const Playstyle = () => {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className={`overflow-hidden rounded-[2rem] flex items-center justify-center ${
-                  isDark
-                    ? "shadow-[0_20px_80px_rgba(0,113,227,0.18)]"
-                    : "shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
-                }`}
+                className="overflow-hidden rounded-[2rem] flex items-center justify-center shadow-[0_20px_60px_rgba(0,0,0,0.08)] dark:shadow-[0_20px_80px_rgba(0,113,227,0.18)]"
               >
                 <img
                   src="/Assets/Playstyle.png"
