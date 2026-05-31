@@ -58,9 +58,9 @@ const Navbar = () => {
           </Link>
 
           <Link
-            href="/categories"
+            href="/products"
             className={`pb-1 transition-colors ${
-              pathname === "/categories"
+              pathname === "/products"
                 ? isDark
                   ? "text-cyan-400 border-b-2 border-cyan-400"
                   : "text-[#0071E3] border-b-2 border-[#0071E3]"
@@ -69,7 +69,7 @@ const Navbar = () => {
                   : "hover:text-[#0071E3]"
             }`}
           >
-            Categories
+            All Products
           </Link>
 
           <Link
