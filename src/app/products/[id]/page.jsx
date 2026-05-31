@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { useTheme } from "next-themes";
 import { pDetails } from "@/lib/Details";
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react"; // Lucide Icon import
+import { ChevronLeft } from "lucide-react"; 
 
 const DetailsPage = () => {
   const { id } = useParams();
