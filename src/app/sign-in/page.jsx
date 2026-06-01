@@ -3,14 +3,13 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
 
 const SigninPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center px-4 transition-colors duration-300 bg-slate-50 text-slate-900 dark:bg-[#0B111E] dark:text-white"
-    >
+    <div className="min-h-screen flex items-center justify-center px-4 transition-colors duration-300 bg-slate-50 text-slate-900 dark:bg-[#0B111E] dark:text-white">
       {/* glow (same vibe as navbar blue) */}
       <div className="absolute w-[500px] h-[500px] bg-[#0071E3]/10 blur-3xl rounded-full top-[-180px] right-[-120px]" />
 
@@ -85,13 +84,9 @@ const SigninPage = () => {
 
         {/* divider */}
         <div className="flex items-center gap-3 text-xs my-5 opacity-60">
-          <div
-            className="flex-1 h-px bg-slate-200 dark:bg-slate-800"
-          />
+          <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
           OR
-          <div
-            className="flex-1 h-px bg-slate-200 dark:bg-slate-800"
-          />
+          <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800" />
         </div>
 
         {/* google button (MATCHED WITH NAVBAR BLUE STYLE) */}
@@ -118,16 +113,17 @@ const SigninPage = () => {
               d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.18 2.12 1.21 5.39l4.11 3.15c.94-2.85 3.57-4.96 6.68-4.96z"
             />
           </svg>
-
           Continue with Google
         </motion.button>
 
         {/* footer */}
         <p className="text-center text-sm mt-6 opacity-70">
           Don’t have an account?{" "}
-          <span className="text-[#0071E3] font-semibold cursor-pointer">
-            Register
-          </span>
+          <Link href="/sign-up">
+            <span className="text-[#0071E3] font-semibold cursor-pointer">
+              Register
+            </span>
+          </Link>
         </p>
       </motion.div>
     </div>
