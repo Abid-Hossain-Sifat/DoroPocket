@@ -72,7 +72,7 @@ const DetailsPage = () => {
               <p className="text-xs uppercase tracking-[0.3em] text-[#0071E3]">{product.category}</p>
               <h1 className="mt-3 text-4xl font-bold">{product.name}</h1>
               <p className="mt-2 text-sm text-slate-500">By {product.brand}</p>
-              <h2 className="mt-8 text-4xl font-bold text-[#0071E3]">৳ {product.price.toLocaleString()}</h2>
+              <h2 className="mt-8 text-4xl font-bold text-[#0071E3]">$ {product.price.toLocaleString()}</h2>
               <p className="mt-6 text-base text-slate-600 leading-relaxed">{product.description}</p>
 
               <ul className="mt-8 space-y-3">
@@ -100,7 +100,7 @@ const DetailsPage = () => {
             </div>
 
             <div className="mt-10 flex gap-4">
-              <button className="flex-1 rounded-full border border-slate-300 px-6 py-4 font-medium hover:bg-slate-50 transition">Add to Cart</button>
+              <button className="flex-1 rounded-full border border-slate-300 px-6 py-4 font-medium hover:bg-slate-50 transition">Add to Wishlist</button>
               <button className="flex-1 rounded-full bg-[#0071E3] px-6 py-4 font-medium text-white hover:bg-[#005bb5] transition">Buy Now</button>
             </div>
           </div>
