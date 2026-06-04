@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
+import LayoutWrapper from "@/Components/LayoutWrapper";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -22,9 +23,11 @@ export default function RootLayout({ children }) {
           attribute="class"
           defaultTheme="light" 
         >
-          <Navbar></Navbar>
+          {/* <Navbar></Navbar> */}
+          <LayoutWrapper>
           {children}
-          <Footer></Footer>
+          {/* <Footer></Footer> */}
+          </LayoutWrapper>
         </ThemeProvider>
       </body>
     </html>

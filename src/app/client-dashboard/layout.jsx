@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Home,
   ShoppingBag,
@@ -11,18 +11,39 @@ import {
   XCircle,
   CheckCircle2,
   ArrowLeft,
+  Loader2,
 } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
 
 const ClientDashLayout = ({ children }) => {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+
+  const { data: session, isPending } = authClient.useSession();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
+  useEffect(() => {
+    if (mounted && !isPending && !session) {
+      router.push(`/sign-in?callbackUrl=${encodeURIComponent(pathname)}`);
+    }
+  }, [session, isPending, pathname, router, mounted]);
+
+  if (!mounted || isPending) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[#0B111E]">
+        <Loader2 className="w-10 h-10 animate-spin text-[#0071E3]" />
+      </div>
+    );
+  }
+
+  if (!session) {
+    return null;
+  }
 
   const isDark = theme === "dark";
 

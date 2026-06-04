@@ -1,16 +1,27 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter, usePathname } from "next/navigation";
 import { pDetails } from "@/lib/Details";
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react"; 
+import { ChevronLeft, Loader2 } from "lucide-react"; 
+import { authClient } from "@/lib/auth-client";
 
 const DetailsPage = () => {
   const { id } = useParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
+
+  const { data: session, isPending } = authClient.useSession();
+
+  useEffect(() => {
+    if (!isPending && !session) {
+      router.push(`/sign-in?callbackUrl=${encodeURIComponent(pathname)}`);
+    }
+  }, [session, isPending, pathname, router]);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -23,10 +34,18 @@ const DetailsPage = () => {
       }
     };
 
-    if (id) fetchProduct();
-  }, [id]);
+    if (id && session) fetchProduct();
+  }, [id, session]);
 
-  if (!product) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  if (isPending || !session) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[#0B111E]">
+        <Loader2 className="w-10 h-10 animate-spin text-[#0071E3]" />
+      </div>
+    );
+  }
+
+  if (!product) return <div className="min-h-screen flex items-center justify-center">Loading product details...</div>;
 
   const allImages = [product.thumbnail, ...(product.images || [])];
 
