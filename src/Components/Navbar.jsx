@@ -6,6 +6,7 @@ import { Sun, Moon, ShoppingCart, User, LayoutDashboard, LogOut } from "lucide-r
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const { theme, resolvedTheme, setTheme } = useTheme();
@@ -13,17 +14,51 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
   const dropdownRef = useRef(null);
+  const timeoutRef = useRef(null);
 
   const { data: session } = authClient.useSession();
 
+  const closeDropdown = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setDropdownOpen(false);
+  };
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setDropdownOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setDropdownOpen(false);
+    }, 1000);
+  };
+
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => {
+      setMounted(true);
+    }, 0);
+    return () => {
+      clearTimeout(timer);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
   }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false);
+        closeDropdown();
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -33,7 +68,7 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = async () => {
-    setDropdownOpen(false);
+    closeDropdown();
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
@@ -153,11 +188,17 @@ const Navbar = () => {
             <div
               ref={dropdownRef}
               className="relative animate-in fade-in duration-200"
-              onMouseEnter={() => setDropdownOpen(true)}
-              onMouseLeave={() => setDropdownOpen(false)}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
               <button
-                onClick={() => setDropdownOpen(!dropdownOpen)}
+                onClick={() => {
+                  if (dropdownOpen) {
+                    closeDropdown();
+                  } else {
+                    handleMouseEnter();
+                  }
+                }}
                 className={`flex items-center gap-3 py-1.5 px-3 rounded-full transition-all duration-300 ${isDark
                     ? "hover:bg-slate-800 text-slate-200"
                     : "hover:bg-slate-100 text-slate-700"
@@ -184,17 +225,22 @@ const Navbar = () => {
               </button>
 
               {/* Dropdown Menu */}
-              {dropdownOpen && (
-                <div
-                  className={`absolute right-0 mt-2 w-48 rounded-2xl shadow-xl border overflow-hidden z-50 transition-all duration-200 ${
-                    isDark
-                      ? "bg-[#0B111E] border-slate-800 text-white"
-                      : "bg-white border-slate-100 text-slate-800"
-                  }`}
-                >
+              <AnimatePresence>
+                {dropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                    transition={{ duration: 0.15, ease: "easeOut" }}
+                    className={`absolute right-0 mt-2 w-48 rounded-2xl shadow-xl border overflow-hidden z-50 ${
+                      isDark
+                        ? "bg-[#0B111E] border-slate-800 text-white"
+                        : "bg-white border-slate-100 text-slate-800"
+                    }`}
+                  >
                   <Link
                     href="/client-dashboard"
-                    onClick={() => setDropdownOpen(false)}
+                    onClick={closeDropdown}
                     className={`flex items-center gap-2 px-4 py-3 text-sm transition-colors ${
                       isDark ? "hover:bg-slate-800" : "hover:bg-slate-50"
                     }`}
@@ -213,8 +259,9 @@ const Navbar = () => {
                     <LogOut size={16} />
                     Log Out
                   </button>
-                </div>
+                </motion.div>
               )}
+            </AnimatePresence>
             </div>
           ) : (
             <Link href='/sign-in'>
